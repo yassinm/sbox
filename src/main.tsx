@@ -7,6 +7,7 @@ import { createClient, Provider } from 'urql';
 
 const client = createClient({
   url: '/ui',
+  // url: 'http://localhost:8080/ui',
 });
 
 ReactDOM.render(
