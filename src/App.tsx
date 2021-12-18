@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import logo from './logo.svg'
+
 import './App.css'
 
-import { useQuery, useMutation } from 'urql';
+import { useQuery } from 'urql';
 import { Article, QueryArticleArgs } from './gql/graphql';
+
 
 const getArticlesQuery = `
   query {
@@ -14,14 +16,29 @@ const getArticlesQuery = `
 `;
 
 const getArticleQuery = `
-  Article (id: $id) {
-    id
+  query ($id: String!) {
+    Article (id: $id) {
+      id
+    }
   }
 `;
 
 function App() {
   const [count, setCount] = useState(0)
 
+  const [result, reexecuteQuery] = useQuery<Article, QueryArticleArgs>({
+    query: getArticleQuery,
+    variables: { id: 'another' },
+  });
+
+  const { data, fetching, error } = result;
+  if (fetching) return <p>Loading...</p>;
+  if (error) {
+    console.log(error);
+    return <p>Oh no... {error.message}</p>;
+  }
+
+  console.log(data);
   return (
     <div className="App">
       <header className="App-header">
