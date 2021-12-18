@@ -1,0 +1,99 @@
+
+type Image {
+  alt_text: String
+  attribution: String
+  attribution_link: String
+  caption: String
+  cdn: String
+  file_name: String!
+  height: Int!
+  id: String!
+  width: Int!
+}
+
+
+type Website {
+  body: String
+  id: String!
+  profile: Profile
+  url: String!
+}
+
+
+type Section {
+  body: String
+  description: String!
+  id: String!
+  name: String!
+  weight: Int
+}
+
+
+type Article {
+  body: String
+  category: Category
+  draft: Boolean!
+  edit_description: String
+  excerpt: String!
+  featured: Boolean!
+  id: String!
+  image: Image
+  last_edit_date: String
+  profile: Profile
+  publish_date: String!
+  tags: [String]
+  title: String!
+}
+
+
+type Profile {
+  age: Int
+  body: String
+  company: String
+  first_name: String!
+  id: String!
+  image: String
+  last_name: String!
+  title: String
+}
+
+
+type Page {
+  body: String
+  draft: Boolean!
+  excerpt: String!
+  id: String!
+  image: String
+  publish_date: String!
+  section: String
+  tags: [String]
+  title: String!
+  weight: Int
+}
+
+
+type Query {
+  Article(id: String): Article
+  Category(id: String): Category
+  Image(id: String): Image
+  Page(id: String): Page
+  Profile(id: String): Profile
+  Section(id: String): Section
+  Website(id: String): Website
+  allArticles: [Article]
+  allCategorys: [Category]
+  allImages: [Image]
+  allPages: [Page]
+  allProfiles: [Profile]
+  allSections: [Section]
+  allWebsites: [Website]
+}
+
+
+type Category {
+  body: String
+  description: String!
+  id: String!
+  image: String
+  name: String!
+}

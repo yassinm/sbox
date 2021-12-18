@@ -2,6 +2,23 @@ import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
+import { useQuery, useMutation } from 'urql';
+import { Article, QueryArticleArgs } from './gql/graphql';
+
+const getArticlesQuery = `
+  query {
+    allArticles {
+      id
+    }
+  }
+`;
+
+const getArticleQuery = `
+  Article (id: $id) {
+    id
+  }
+`;
+
 function App() {
   const [count, setCount] = useState(0)
 
